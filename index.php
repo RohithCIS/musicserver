@@ -7,9 +7,15 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <!--<script src="audiojs/audio.min.js"></script>-->
     <link rel="stylesheet" type="text/css" media="(min-width: 720px)" href="css/style.css">
 	<link rel="stylesheet" type="text/css" media="(max-width: 720px)" href="css/mobile.css">
     <link rel="stylesheet" href="fonts/raleway.css" type="text/css" charset="utf-8" />
+    <!--<script>
+        audiojs.events.ready(function() {
+            var as = audiojs.createAll();
+        });
+    </script>-->
 </head>
 <body>
     <div class="audioembed">
@@ -19,6 +25,8 @@
         </audio>
         <!--<button class="preBtn">&#8249;</button>
         <button class="nextBtn">&#8250;</button>-->
+        <h1>Audio Server Jukebox</h1>
+        <h3 id="sname">...</h3>
     </div>
     <div class="plist col-md-12 col-sm-12 col-xs-12 col-lg-12">
         <ul id="playlist">
@@ -41,12 +49,13 @@ function init(){
     audio = $('#audio');
     playlist = $('#playlist');
     tracks = playlist.find('li a');
-    len = tracks.length - 1;
+    len = tracks.length;
     audio[0].volume = 1.0;
     playlist.find('a').click(function(e){
         e.preventDefault();
         link = $(this);
         current = link.parent().index();
+        document.getElementById("sname").innerHTML="Now Playing : <br>"+playlist.find('a')[current].innerHTML;
         run(link, audio[0]);
     });
     audio[0].addEventListener('ended',function(e){
@@ -98,6 +107,10 @@ function run(link, player){
         par.addClass('active').siblings().removeClass('active');
         audio[0].load();
         audio[0].play();
+}
+
+function snameChange(){
+    
 }
 
 </script>
